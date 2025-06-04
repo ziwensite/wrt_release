@@ -80,6 +80,11 @@ update_feeds() {
     #     echo "src-git nss_packages https://github.com/LiBwrt/nss-packages.git" >>"$BUILD_DIR/$FEEDS_CONF"
     # fi
 
+    # Unishare
+    git_sparse_clone main https://github.com/linkease/nas-packages-luci luci/luci-app-unishare
+    git_sparse_clone master https://github.com/linkease/nas-packages network/services/unishare
+    git_sparse_clone master https://github.com/linkease/nas-packages network/services/webdav2
+
     # 更新 feeds
     ./scripts/feeds clean
     ./scripts/feeds update -a
