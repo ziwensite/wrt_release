@@ -90,8 +90,8 @@ update_feeds() {
     if ! grep -q "small-package" "$FEEDS_PATH"; then
         # 确保文件以换行符结尾
         [ -z "$(tail -c 1 "$FEEDS_PATH")" ] || echo "" >>"$FEEDS_PATH"
-        # echo "src-git small8 https://github.com/kenzok8/small-package" >>"$FEEDS_PATH"
-		echo "src-git small8 https://github.com/kiddin9/kwrt-packages" >>"$FEEDS_PATH"
+        echo "src-git small8 https://github.com/kenzok8/small-package" >>"$FEEDS_PATH"
+		#echo "src-git small8 https://github.com/kiddin9/kwrt-packages" >>"$FEEDS_PATH"
 		
     fi
 
