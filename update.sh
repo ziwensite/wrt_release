@@ -197,7 +197,8 @@ install_small8() {
         tailscale luci-app-tailscale oaf open-app-filter luci-app-oaf easytier luci-app-easytier \
         msd_lite luci-app-msd_lite cups luci-app-cupsd verysync luci-app-verysync luci-app-openlist2 \
 		webdav2 unishare luci-app-unishare sunpanel luci-app-sunpanel luci-app-memos \
-		luci-app-nft-timecontrol luci-app-taskplan luci-app-openclash luci-app-partexp
+		luci-app-nft-timecontrol luci-app-taskplan luci-app-openclash luci-app-partexp luci-app-nekobox \
+		
 }
 
 
