@@ -93,8 +93,8 @@ update_feeds() {
         echo "src-git small8 https://github.com/kenzok8/small-package" >>"$FEEDS_PATH"	
     fi
 
-    # 检查并添加 istore 源
-    if ! grep -q "kiddin9" "$FEEDS_PATH"; then
+    # 检查并添加 kwrt-packages 源
+    if ! grep -q "kwrt-packages" "$FEEDS_PATH"; then
         # 确保文件以换行符结尾
         [ -z "$(tail -c 1 "$FEEDS_PATH")" ] || echo "" >>"$FEEDS_PATH"
         echo "src-git kiddin9 https://github.com/kiddin9/kwrt-packages" >>"$FEEDS_PATH"		
