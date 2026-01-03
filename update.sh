@@ -245,15 +245,16 @@ check_default_settings() {
 install_feeds() {
     ./scripts/feeds update -i
     for dir in $BUILD_DIR/feeds/*; do
-        # 检查是否为目录并且不以 .tmp 结尾，并且不是软链接
+        # 检查是否为目录并且不以 .tmp / .index / .targetindex 结尾，并且不是软链接
         if [ -d "$dir" ] && [[ ! "$dir" == *.tmp ]] && [[ ! "$dir" == *.index ]] && [[ ! "$dir" == *.targetindex ]]; then
-            if [[ $(basename "$dir") == "small8" ]]; then
+            dir_name=$(basename "$dir")
+            if [[ "$dir_name" == "small8" ]]; then
                 install_small8
                 install_fullconenat
-			if [[ $(basename "$dir") == "istore" ]]; then
+            elif [[ "$dir_name" == "istore" ]]; then
                 install_istore
             else
-                ./scripts/feeds install -f -ap $(basename "$dir")
+                ./scripts/feeds install -f -ap "$dir_name"
             fi
         fi
     done
