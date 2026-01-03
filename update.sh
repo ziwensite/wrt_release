@@ -90,9 +90,14 @@ update_feeds() {
     if ! grep -q "small-package" "$FEEDS_PATH"; then
         # 确保文件以换行符结尾
         [ -z "$(tail -c 1 "$FEEDS_PATH")" ] || echo "" >>"$FEEDS_PATH"
-        echo "src-git small8 https://github.com/kenzok8/small-package" >>"$FEEDS_PATH"
-		#echo "src-git small8 https://github.com/kiddin9/kwrt-packages" >>"$FEEDS_PATH"
-		
+        echo "src-git small8 https://github.com/kenzok8/small-package" >>"$FEEDS_PATH"	
+    fi
+
+    # 检查并添加 istore 源
+    if ! grep -q "istore" "$FEEDS_PATH"; then
+        # 确保文件以换行符结尾
+        [ -z "$(tail -c 1 "$FEEDS_PATH")" ] || echo "" >>"$FEEDS_PATH"
+        echo "src-git istore https://github.com/linkease/istore;main" >>"$FEEDS_PATH"		
     fi
 
     # 添加bpf.mk解决更新报错
@@ -191,16 +196,18 @@ install_small8() {
         naiveproxy shadowsocks-rust sing-box v2ray-core v2ray-geodata geoview v2ray-plugin \
         tuic-client chinadns-ng ipt2socks tcping trojan-plus simple-obfs shadowsocksr-libev \
         luci-app-passwall v2dat mosdns luci-app-mosdns adguardhome luci-app-adguardhome ddns-go \
-        luci-app-ddns-go taskd luci-lib-xterm luci-lib-taskd luci-app-store quickstart \
-        luci-app-quickstart luci-app-istorex luci-app-cloudflarespeedtest netdata luci-app-netdata \
+        luci-app-ddns-go quickstart \
+        luci-app-quickstart luci-app-cloudflarespeedtest netdata luci-app-netdata \
         lucky luci-app-lucky luci-app-openclash luci-app-homeproxy luci-app-amlogic nikki luci-app-nikki \
         tailscale luci-app-tailscale oaf open-app-filter luci-app-oaf easytier luci-app-easytier \
         msd_lite luci-app-msd_lite cups luci-app-cupsd verysync luci-app-verysync luci-app-openlist2 \
 		webdav2 unishare luci-app-unishare sunpanel luci-app-sunpanel luci-app-memos \
-		luci-app-nft-timecontrol luci-app-taskplan luci-app-openclash luci-app-partexp luci-app-nekobox \
-		
+		luci-app-nft-timecontrol luci-app-taskplan luci-app-openclash luci-app-partexp luci-app-nekobox \		
 }
 
+install_istore() {
+	./scripts/feeds install -d y -p istore luci-app-store		
+}
 
 install_fullconenat() {
     if [ ! -d $BUILD_DIR/package/network/utils/fullconenat-nft ]; then
@@ -243,6 +250,8 @@ install_feeds() {
             if [[ $(basename "$dir") == "small8" ]]; then
                 install_small8
                 install_fullconenat
+			if [[ $(basename "$dir") == "istore" ]]; then
+                install_istore
             else
                 ./scripts/feeds install -f -ap $(basename "$dir")
             fi
