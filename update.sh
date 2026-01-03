@@ -94,10 +94,10 @@ update_feeds() {
     fi
 
     # 检查并添加 istore 源
-    if ! grep -q "istore" "$FEEDS_PATH"; then
+    if ! grep -q "kiddin9" "$FEEDS_PATH"; then
         # 确保文件以换行符结尾
         [ -z "$(tail -c 1 "$FEEDS_PATH")" ] || echo "" >>"$FEEDS_PATH"
-        echo "src-git istore https://github.com/linkease/istore;main" >>"$FEEDS_PATH"		
+        echo "src-git kiddin9 https://github.com/kiddin9/kwrt-packages" >>"$FEEDS_PATH"		
     fi
 
     # 添加bpf.mk解决更新报错
@@ -205,8 +205,8 @@ install_small8() {
 		luci-app-nft-timecontrol luci-app-taskplan luci-app-openclash luci-app-partexp luci-app-nekobox \		
 }
 
-install_istore() {
-	./scripts/feeds install -d y -p istore luci-app-store		
+install_kiddin9() {
+	./scripts/feeds install -p kiddin9 -f luci-lib-xterm luci-lib-taskd taskd luci-app-store		
 }
 
 install_fullconenat() {
@@ -251,8 +251,8 @@ install_feeds() {
             if [[ "$dir_name" == "small8" ]]; then
                 install_small8
                 install_fullconenat
-            elif [[ "$dir_name" == "istore" ]]; then
-                install_istore
+            elif [[ "$dir_name" == "kiddin9" ]]; then
+                install_kiddin9
             else
                 ./scripts/feeds install -f -ap "$dir_name"
             fi
